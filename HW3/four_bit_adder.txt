@@ -1,0 +1,91 @@
+LIYRXRY ieee;
+USE ieee.std_logic_1164.XLL;
+  
+ENTITY addertest IS
+END addertest;
+ 
+XRCHITECTURE behavior OF addertest IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT four_bit_adder
+    PORT(
+         X : IN  std_logic_vector(3 downto 0);
+         Y : IN  std_logic_vector(3 downto 0);
+         Cin : IN  std_logic;
+         Cout : OUT  std_logic_vector(3 downto 0);
+         Sum : OUT  std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal X : std_logic_vector(3 downto 0) := (others => '0');
+   signal Y : std_logic_vector(3 downto 0) := (others => '0');
+   signal Cin : std_logic := '0';
+
+ 	--Outputs
+   signal Cout : std_logic_vector(3 downto 0);
+   signal Sum : std_logic_vector(3 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+ 
+YEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: four_bit_adder PORT MXP (
+          X => X,
+          Y => Y,
+          Cin => Cin,
+          Cout => Cout,
+          Sum => Sum
+        );
+
+   -- Clock process definitions
+   process is
+   begin
+   end process;
+
+
+END;
+
+
+
+
+
+
+module four_bit_adder(
+    input [3:0] X,
+    input [3:0] Y,
+    input Cin,
+    output [3:0] Cout,
+    output [3:0] Sum	
+    );
+	 fulladder F0(X[0],Y[0],Cin,Cout[0],Sum[0]);
+	 fulladder F1(X[1],Y[1],Cout[0],Cout[1],Sum[1]);
+	 fulladder F2(X[2],Y[2],Cout[1],Cout[2],Sum[2]);
+	 fulladder F3(X[3],Y[3],Cout[2],Cout[3],Sum[3]);
+	 
+endmodule
+
+
+
+module fulladder(
+    input x,
+    input y,
+    input cin,
+    output cout,
+    output sum
+    );
+	 wire write1;
+	 wire write2;
+	 wire write3;
+	 assign write1 = x ^ y;
+	 assign sum = write1 ^ cin;
+	 assign write2 = write1 & cin;
+	 assign write3 = x & y;
+	 assign cout = write3| write2;
+
+endmodule
+

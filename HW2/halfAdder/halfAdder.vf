@@ -1,0 +1,40 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : halfAdder.vf
+// /___/   /\     Timestamp : 10/13/2021 16:31:37
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: sch2hdl -intstyle ise -family artix7 -verilog E:/uni/term7/ArchLab/2/halfAdder/halfAdder.vf -w E:/uni/term7/ArchLab/2/halfAdder/halfAdder.sch
+//Design Name: halfAdder
+//Device: artix7
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale 1ns / 1ps
+
+module halfAdder(A, 
+                 B, 
+                 CARRY, 
+                 SUM);
+
+    input A;
+    input B;
+   output CARRY;
+   output SUM;
+   
+   
+   AND2  XLXI_1 (.I0(A), 
+                .I1(B), 
+                .O(CARRY));
+   XOR2  XLXI_2 (.I0(B), 
+                .I1(A), 
+                .O(SUM));
+endmodule
